@@ -7,6 +7,7 @@ import com.plamen.investmindjournal.service.SecondOpinionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,6 +37,7 @@ public class SecondOpinionController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDecisionById(@PathVariable UUID id) {
         secondOpinionService.deleteDecisionById(id);
     }

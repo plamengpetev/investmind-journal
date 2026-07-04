@@ -14,8 +14,8 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/opinion/a21f6b9f-8757-4a0c-9b43-c1a255d01b3c
+GET http://localhost:8080/api/opinion/7120a40a-e3ca-4eec-b3b6-3e08b808b060
 
 ###
 
-DELETE http://localhost:8080/api/opinion/a21f6b9f-8757-4a0c-9b43-c1a255d01b3c
+DELETE http://localhost:8080/api/opinion/7120a40a-e3ca-4eec-b3b6-3e08b808b060
