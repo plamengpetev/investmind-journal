@@ -2,14 +2,19 @@ package com.plamen.investmindjournal.service;
 
 import com.plamen.investmindjournal.dto.InvestmentDecisionRequest;
 import com.plamen.investmindjournal.dto.SecondOpinionResponse;
+import com.plamen.investmindjournal.model.InvestmentDecision;
+import com.plamen.investmindjournal.repository.InvestmentDecisionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class SecondOpinionService {
+
+    private final InvestmentDecisionRepository investmentDecisionRepository;
 
     public SecondOpinionResponse analyze(InvestmentDecisionRequest request) {
 
@@ -55,8 +60,21 @@ public class SecondOpinionService {
             summary = "Your investment decision requires more analysis.";
         }
 
+        InvestmentDecision decision = InvestmentDecision.builder()
+                .assetName(request.getAssetName())
+                .action(request.getAction())
+                .reason(request.getReason())
+                .riskLevel(request.getRiskLevel())
+                .investmentHorizon(request.getInvestmentHorizon())
+                .exitPlan(request.getExitPlan())
+                .score(score)
+                .summary(summary)
+                .build();
+
+        InvestmentDecision savedDecision = investmentDecisionRepository.save(decision);
+
         return new SecondOpinionResponse(
-                UUID.randomUUID(),
+                savedDecision.getId(),
                 score,
                 strengths,
                 missing,
