@@ -84,4 +84,8 @@ public class SecondOpinionService {
                 summary
         );
     }
+
+    public List<InvestmentDecision> getAllDecisions() {
+        return investmentDecisionRepository.findAll();
+    }
 }

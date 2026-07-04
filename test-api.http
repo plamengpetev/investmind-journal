@@ -11,3 +11,7 @@ Content-Type: application/json
   "investmentHorizon": "5 years",
   "exitPlan": "I will sell if the ETF drops below my risk tolerance or if the sector becomes overvalued."
 }
+
+###
+
+GET http://localhost:8080/api/opinion
