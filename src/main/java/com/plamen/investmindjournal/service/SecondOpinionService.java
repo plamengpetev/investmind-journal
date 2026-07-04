@@ -99,4 +99,15 @@ public class SecondOpinionService {
                         "Investment decision not found with id: " + id
                 ));
     }
+
+    public void deleteDecisionById(UUID id) {
+        if (!investmentDecisionRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Investment decision not found with id: " + id
+            );
+        }
+
+        investmentDecisionRepository.deleteById(id);
+    }
 }

@@ -34,4 +34,9 @@ public class SecondOpinionController {
     public InvestmentDecision getDecisionById(@PathVariable UUID id) {
         return secondOpinionService.getDecisionById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteDecisionById(@PathVariable UUID id) {
+        secondOpinionService.deleteDecisionById(id);
+    }
 }
