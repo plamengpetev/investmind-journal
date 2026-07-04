@@ -6,6 +6,8 @@ import com.plamen.investmindjournal.model.InvestmentDecision;
 import com.plamen.investmindjournal.repository.InvestmentDecisionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +94,9 @@ public class SecondOpinionService {
 
     public InvestmentDecision getDecisionById(UUID id) {
         return investmentDecisionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Investment decision not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Investment decision not found with id: " + id
+                ));
     }
 }
