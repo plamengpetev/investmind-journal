@@ -1,3 +1,4 @@
+### Create investment decision
 POST http://localhost:8080/api/opinion
 Content-Type: application/json
 
@@ -12,17 +13,14 @@ Content-Type: application/json
   "exitPlan": "I will sell if the ETF drops below my risk tolerance or if the sector becomes overvalued."
 }
 
-###
+### Get all investment decisions
+GET http://localhost:8080/api/opinion
 
-GET http://localhost:8080/api/opinion/d4b2aa07-aaac-462d-9539-eb2af3028b86
+### Get investment decision by ID
+GET http://localhost:8080/api/opinion/PASTE_EXISTING_ID_HERE
 
-###
-
-DELETE http://localhost:8080/api/opinion/PASTE_ID_HERE
-
-###
-
-PUT http://localhost:8080/api/opinion/d4b2aa07-aaac-462d-9539-eb2af3028b86
+### Update investment decision by ID
+PUT http://localhost:8080/api/opinion/PASTE_EXISTING_ID_HERE
 Content-Type: application/json
 
 {
@@ -35,3 +33,9 @@ Content-Type: application/json
   "investmentHorizon": "",
   "exitPlan": ""
 }
+
+### Delete investment decision by ID
+DELETE http://localhost:8080/api/opinion/PASTE_EXISTING_ID_HERE
+
+### Test not found response
+GET http://localhost:8080/api/opinion/11111111-1111-1111-1111-111111111111
