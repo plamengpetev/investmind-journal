@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -87,5 +88,10 @@ public class SecondOpinionService {
 
     public List<InvestmentDecision> getAllDecisions() {
         return investmentDecisionRepository.findAll();
+    }
+
+    public InvestmentDecision getDecisionById(UUID id) {
+        return investmentDecisionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Investment decision not found with id: " + id));
     }
 }

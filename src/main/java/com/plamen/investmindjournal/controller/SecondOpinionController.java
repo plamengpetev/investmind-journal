@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/opinion")
@@ -27,5 +28,10 @@ public class SecondOpinionController {
     @GetMapping
     public List<InvestmentDecision> getAllDecisions() {
         return secondOpinionService.getAllDecisions();
+    }
+
+    @GetMapping("/{id}")
+    public InvestmentDecision getDecisionById(@PathVariable UUID id) {
+        return secondOpinionService.getDecisionById(id);
     }
 }

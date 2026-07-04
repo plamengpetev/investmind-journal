@@ -14,4 +14,4 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/opinion
+GET http://localhost:8080/api/opinion/4e6ea353-d814-4511-a643-2a001de1d5a0
