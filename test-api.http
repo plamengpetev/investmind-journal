@@ -1,0 +1,14 @@
+### GET request to example server
+POST http://localhost:8080/api/opinion
+Content-Type: application/json
+
+{
+  "assetName": "Nvidia",
+  "assetType": "Stock",
+  "amount": 300,
+  "currency": "EUR",
+  "reason": "AI is growing fast.",
+  "riskLevel": "",
+  "investmentHorizon": "",
+  "exitPlan": ""
+}
