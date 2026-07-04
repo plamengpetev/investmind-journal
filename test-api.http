@@ -1,14 +1,13 @@
-### GET request to example server
 POST http://localhost:8080/api/opinion
 Content-Type: application/json
 
 {
-  "assetName": "Nvidia",
-  "assetType": "Stock",
-  "amount": 300,
+  "assetName": "SECO ETF",
+  "assetType": "ETF",
+  "amount": 100,
   "currency": "EUR",
-  "reason": "AI is growing fast.",
-  "riskLevel": "",
-  "investmentHorizon": "",
-  "exitPlan": ""
+  "reason": "I want exposure to the semiconductor sector because I believe demand for chips and AI infrastructure will continue to grow.",
+  "riskLevel": "High",
+  "investmentHorizon": "5 years",
+  "exitPlan": "I will sell if the ETF drops below my risk tolerance or if the sector becomes overvalued."
 }

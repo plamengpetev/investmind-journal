@@ -62,12 +62,14 @@ public class SecondOpinionService {
 
         InvestmentDecision decision = InvestmentDecision.builder()
                 .assetName(request.getAssetName())
-                .action(request.getAction())
+                .assetType(request.getAssetType())
+                .amount(request.getAmount())
+                .currency(request.getCurrency())
                 .reason(request.getReason())
                 .riskLevel(request.getRiskLevel())
                 .investmentHorizon(request.getInvestmentHorizon())
                 .exitPlan(request.getExitPlan())
-                .score(score)
+                .decisionScore(score)
                 .summary(summary)
                 .build();
 
