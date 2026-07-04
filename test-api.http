@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/opinion/8d94273f-aeb7-46fd-a4f1-4bfc1cd6daf6
+GET http://localhost:8080/api/opinion/d4b2aa07-aaac-462d-9539-eb2af3028b86
 
 ###
 
@@ -22,7 +22,7 @@ DELETE http://localhost:8080/api/opinion/PASTE_ID_HERE
 
 ###
 
-PUT http://localhost:8080/api/opinion/8d94273f-aeb7-46fd-a4f1-4bfc1cd6daf6
+PUT http://localhost:8080/api/opinion/d4b2aa07-aaac-462d-9539-eb2af3028b86
 Content-Type: application/json
 
 {
@@ -30,8 +30,8 @@ Content-Type: application/json
   "assetType": "Commodity",
   "amount": 250,
   "currency": "EUR",
-  "reason": "I want to diversify part of my portfolio with gold because it can behave differently from technology stocks and ETFs.",
-  "riskLevel": "Medium",
-  "investmentHorizon": "3 years",
-  "exitPlan": "I will sell if gold becomes strongly overvalued or if I need to rebalance the portfolio."
+  "reason": "Gold hedge.",
+  "riskLevel": "",
+  "investmentHorizon": "",
+  "exitPlan": ""
 }

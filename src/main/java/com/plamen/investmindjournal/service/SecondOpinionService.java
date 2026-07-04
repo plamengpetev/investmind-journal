@@ -21,6 +21,80 @@ public class SecondOpinionService {
 
     public SecondOpinionResponse analyze(InvestmentDecisionRequest request) {
 
+        AnalysisResult analysisResult = analyzeDecision(request);
+
+        InvestmentDecision decision = InvestmentDecision.builder()
+                .assetName(request.getAssetName())
+                .assetType(request.getAssetType())
+                .amount(request.getAmount())
+                .currency(request.getCurrency())
+                .reason(request.getReason())
+                .riskLevel(request.getRiskLevel())
+                .investmentHorizon(request.getInvestmentHorizon())
+                .exitPlan(request.getExitPlan())
+                .decisionScore(analysisResult.score())
+                .summary(analysisResult.summary())
+                .build();
+
+        InvestmentDecision savedDecision = investmentDecisionRepository.save(decision);
+
+        return new SecondOpinionResponse(
+                savedDecision.getId(),
+                analysisResult.score(),
+                analysisResult.strengths(),
+                analysisResult.missing(),
+                analysisResult.questions(),
+                analysisResult.summary()
+        );
+    }
+
+    public List<InvestmentDecision> getAllDecisions() {
+        return investmentDecisionRepository.findAll();
+    }
+
+    public InvestmentDecision getDecisionById(UUID id) {
+        return investmentDecisionRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Investment decision not found with id: " + id
+                ));
+    }
+
+    public void deleteDecisionById(UUID id) {
+        if (!investmentDecisionRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Investment decision not found with id: " + id
+            );
+        }
+
+        investmentDecisionRepository.deleteById(id);
+    }
+
+    public InvestmentDecision updateDecision(UUID id, InvestmentDecisionRequest request) {
+        InvestmentDecision decision = investmentDecisionRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Investment decision not found with id: " + id
+                ));
+
+        AnalysisResult analysisResult = analyzeDecision(request);
+
+        decision.setAssetName(request.getAssetName());
+        decision.setAssetType(request.getAssetType());
+        decision.setAmount(request.getAmount());
+        decision.setCurrency(request.getCurrency());
+        decision.setReason(request.getReason());
+        decision.setRiskLevel(request.getRiskLevel());
+        decision.setInvestmentHorizon(request.getInvestmentHorizon());
+        decision.setExitPlan(request.getExitPlan());
+        decision.setDecisionScore(analysisResult.score());
+        decision.setSummary(analysisResult.summary());
+
+        return investmentDecisionRepository.save(decision);
+    }
+
+    private AnalysisResult analyzeDecision(InvestmentDecisionRequest request) {
         int score = 100;
 
         List<String> strengths = new ArrayList<>();
@@ -63,70 +137,15 @@ public class SecondOpinionService {
             summary = "Your investment decision requires more analysis.";
         }
 
-        InvestmentDecision decision = InvestmentDecision.builder()
-                .assetName(request.getAssetName())
-                .assetType(request.getAssetType())
-                .amount(request.getAmount())
-                .currency(request.getCurrency())
-                .reason(request.getReason())
-                .riskLevel(request.getRiskLevel())
-                .investmentHorizon(request.getInvestmentHorizon())
-                .exitPlan(request.getExitPlan())
-                .decisionScore(score)
-                .summary(summary)
-                .build();
-
-        InvestmentDecision savedDecision = investmentDecisionRepository.save(decision);
-
-        return new SecondOpinionResponse(
-                savedDecision.getId(),
-                score,
-                strengths,
-                missing,
-                questions,
-                summary
-        );
+        return new AnalysisResult(score, strengths, missing, questions, summary);
     }
 
-    public List<InvestmentDecision> getAllDecisions() {
-        return investmentDecisionRepository.findAll();
-    }
-
-    public InvestmentDecision getDecisionById(UUID id) {
-        return investmentDecisionRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Investment decision not found with id: " + id
-                ));
-    }
-
-    public void deleteDecisionById(UUID id) {
-        if (!investmentDecisionRepository.existsById(id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "Investment decision not found with id: " + id
-            );
-        }
-
-        investmentDecisionRepository.deleteById(id);
-    }
-
-    public InvestmentDecision updateDecision(UUID id, InvestmentDecisionRequest request) {
-        InvestmentDecision decision = investmentDecisionRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Investment decision not found with id: " + id
-                ));
-
-        decision.setAssetName(request.getAssetName());
-        decision.setAssetType(request.getAssetType());
-        decision.setAmount(request.getAmount());
-        decision.setCurrency(request.getCurrency());
-        decision.setReason(request.getReason());
-        decision.setRiskLevel(request.getRiskLevel());
-        decision.setInvestmentHorizon(request.getInvestmentHorizon());
-        decision.setExitPlan(request.getExitPlan());
-
-        return investmentDecisionRepository.save(decision);
+    private record AnalysisResult(
+            int score,
+            List<String> strengths,
+            List<String> missing,
+            List<String> questions,
+            String summary
+    ) {
     }
 }
