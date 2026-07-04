@@ -110,4 +110,23 @@ public class SecondOpinionService {
 
         investmentDecisionRepository.deleteById(id);
     }
+
+    public InvestmentDecision updateDecision(UUID id, InvestmentDecisionRequest request) {
+        InvestmentDecision decision = investmentDecisionRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Investment decision not found with id: " + id
+                ));
+
+        decision.setAssetName(request.getAssetName());
+        decision.setAssetType(request.getAssetType());
+        decision.setAmount(request.getAmount());
+        decision.setCurrency(request.getCurrency());
+        decision.setReason(request.getReason());
+        decision.setRiskLevel(request.getRiskLevel());
+        decision.setInvestmentHorizon(request.getInvestmentHorizon());
+        decision.setExitPlan(request.getExitPlan());
+
+        return investmentDecisionRepository.save(decision);
+    }
 }

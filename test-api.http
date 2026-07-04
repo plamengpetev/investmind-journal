@@ -14,8 +14,24 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/opinion/7120a40a-e3ca-4eec-b3b6-3e08b808b060
+GET http://localhost:8080/api/opinion/8d94273f-aeb7-46fd-a4f1-4bfc1cd6daf6
 
 ###
 
-DELETE http://localhost:8080/api/opinion/7120a40a-e3ca-4eec-b3b6-3e08b808b060
+DELETE http://localhost:8080/api/opinion/PASTE_ID_HERE
+
+###
+
+PUT http://localhost:8080/api/opinion/8d94273f-aeb7-46fd-a4f1-4bfc1cd6daf6
+Content-Type: application/json
+
+{
+  "assetName": "Gold",
+  "assetType": "Commodity",
+  "amount": 250,
+  "currency": "EUR",
+  "reason": "I want to diversify part of my portfolio with gold because it can behave differently from technology stocks and ETFs.",
+  "riskLevel": "Medium",
+  "investmentHorizon": "3 years",
+  "exitPlan": "I will sell if gold becomes strongly overvalued or if I need to rebalance the portfolio."
+}

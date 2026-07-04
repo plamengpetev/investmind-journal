@@ -41,4 +41,12 @@ public class SecondOpinionController {
     public void deleteDecisionById(@PathVariable UUID id) {
         secondOpinionService.deleteDecisionById(id);
     }
+
+    @PutMapping("/{id}")
+    public InvestmentDecision updateDecision(
+            @PathVariable UUID id,
+            @Valid @RequestBody InvestmentDecisionRequest request) {
+
+        return secondOpinionService.updateDecision(id, request);
+    }
 }
